@@ -1,0 +1,8 @@
+Zadanie 2.1
+Ile ³¹cznie NOPów zosta³o wczytanych?:  1950
+Zadanie 2.2
+Ile z nich dotyczy kobiet?:  1675
+Zadanie 2.3
+ Ile z nich dotyczy mê¿czyzn?:  265
+Zadanie 3.0
+ Liczba osób, która w województwie pomorskim mia³a gor¹czkê?:  8
