@@ -4,6 +4,7 @@ import json
 woj_list = []
 nop_list = []
 zach_list=[]
+zach_dict_list=[]
 with open('../160221.json', 'r', encoding="utf-8") as json_file:
     data = json.load(json_file)
 
@@ -49,6 +50,8 @@ for nop in data['NOP']:
     woj_list.append(nop["VOIVODESHIP"])
     if nop["VOIVODESHIP"]=="zachodniopomorskie":
         zach_list.append(nop)
+    if nop["VOIVODESHIP"]=="zachodniopomorskie":
+        zach_dict_list.append(nop["DESCRIPTION"])
 
 lM=0
 #lista mezczyzn w NOP
@@ -80,8 +83,6 @@ lPom=0
 
 #print("Zapis do pliku tekstowego")
 f = open("../plik.txt",mode="r+")
-
-
 
 for a in L:
     if(a.__contains__('pomorskie')):
@@ -153,4 +154,25 @@ print("Wyznaczenie swojego województwa, nr indeksu to: ",62929,"przez modulo: "
 woj_ind=ind.__mod__(mod)
 print("Numer województwa to:",woj_ind, "\nWytypowane wojewodztwo to: Zachodniopomorskie")
 print("Dane dotyczące województwa zachodniopomorskiego: \n",zach_list)
+
+print(20*"-")
+
+from collections import Counter
+#print(Counter("this is a sent this is not a word".split()))
+#Counter({"a": 2, "this": 2, "is": 2, "word": 1, "not": 1, "sent": 1})
+
+print("Posortowane objawy według ilości wystąpień w woj. zachodniopomorskim: ")
+#print(zach_dict_list)
+#print(Counter(zach_dict_list).most_common(len(zach_dict_list)))
+#utworzenie tablicy na posortowane według ilości wystąpień
+posort_zach_list=[]
+posort_zach_list.append((Counter(zach_dict_list).most_common(len(zach_dict_list))))
+#wyświetlenie zawartości nowej tablicy
+print(posort_zach_list)
+print("Zapisuje wynik do pliku zachodniopomorskie.txt . . .")
+f = open("../zachodniopomorskie.txt",mode="w+")
+f.write(str(posort_zach_list))
+print("wykonano!")
+f.close()
+
 
