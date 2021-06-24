@@ -1,10 +1,13 @@
 import fnmatch
 from datetime import datetime
+import numpy as np
 import json
+import matplotlib.pyplot as plt
 woj_list = []
 nop_list = []
 zach_list=[]
 zach_dict_list=[]
+full_dictList=[]
 with open('../160221.json', 'r', encoding="utf-8") as json_file:
     data = json.load(json_file)
 
@@ -47,6 +50,7 @@ for nop in data['NOP']:
     nop_list.append(nop)
     a=(id,date,wojewodztwo,powiat,plec,objawy)
     L.append(a)
+    full_dictList.append(nop["DESCRIPTION"])
     woj_list.append(nop["VOIVODESHIP"])
     if nop["VOIVODESHIP"]=="zachodniopomorskie":
         zach_list.append(nop)
@@ -169,10 +173,35 @@ posort_zach_list=[]
 posort_zach_list.append((Counter(zach_dict_list).most_common(len(zach_dict_list))))
 #wyświetlenie zawartości nowej tablicy
 print(posort_zach_list)
-print("Zapisuje wynik do pliku zachodniopomorskie.txt . . .")
+print("\nZapisuje wynik do pliku zachodniopomorskie.txt")
 f = open("../zachodniopomorskie.txt",mode="w+")
 f.write(str(posort_zach_list))
 print("wykonano!")
 f.close()
 
 
+#Zad 5
+print("Zadanie 5 \n Wykres kołowy z ilością osób, które doświadczyły NOP")
+slices = [lK,lM]
+descrLabel = ['Liczba Kobiet','Liczba Mężczyzn']
+kolory=['r','g']
+plt.pie(slices,labels = descrLabel,colors=kolory,autopct="%.2f")
+plt.title("Procent kobiet i mężczyzn, którzy doświadczyli NOP.\n")
+plt.get_current_fig_manager().set_window_title('Zadanie 5. Wykres Kołowy')
+plt.show()
+
+
+#zad 6
+
+#zły trop
+#print(full_dictList)
+print(20*'--')
+posortFull_dictList=[]
+posortFull_dictList.append((Counter(full_dictList).most_common(len(full_dictList))))
+print(posortFull_dictList)
+
+
+#trzeba będzie utworzyć nową liste, zawierającą liste objawów (edytowaną) . wedle konwencji "Zaczerwienienie i bolesność" => ‘zaczerwienienie i krótkotrwała bolesność
+#użyje funkcji .decode lub .replace
+
+podm_dictList=[]
