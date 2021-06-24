@@ -1,7 +1,7 @@
 import fnmatch
 from datetime import datetime
 import json
-
+woj_list = []
 nop_list = []
 with open('../160221.json', 'r', encoding="utf-8") as json_file:
     data = json.load(json_file)
@@ -46,7 +46,7 @@ for nop in data['NOP']:
     nop_list.append(nop)
     a=(id,date,wojewodztwo,powiat,plec,objawy)
     L.append(a)
-
+    woj_list.append(nop["VOIVODESHIP"])
     #i+1
 
 
@@ -74,33 +74,90 @@ for a in L:
         lK+=1
         #print(lK)
 
-lGor=8
+
 # zad 1
 for a in L:
     print(a)
 # zad 2
+print(20*"-")
 print("\n Zadanie 2.1 \n Ile łącznie NOPów zostało wczytanych? ", len(L))
+print(20*"-")
 print("\n Zadanie 2.2 \n Ile z nich dotyczy kobiet? ", lK)
+print(20*"-")
 print("\n Zadanie 2.3 \n Ile z nich dotyczy mężczyzn? ", lM)
-
-# zad 3
-#ilość w pomorskim z NOP
-print("\n Zadanie 3.0 \n Liczba osób, która w województwie pomorskim miała gorączkę? ", lGor)
 lPom=0
 
-print("Zapis do pliku tekstowego")
-f = open("../plik.txt",mode="a+")
+#print("Zapis do pliku tekstowego")
+f = open("../plik.txt",mode="r+")
 
 
 
 for a in L:
     if(a.__contains__('pomorskie')):
-        print(a)
+        #print(a)
         lPom+=1
         f.write(str(a)+"\n")
-print(lPom)
-print(lGor)
+#print(lPom)
+
 f.close()
+
+plik = open('../plik.txt')
+try:
+	tekst = plik.read()
+finally:
+	plik.close()
+
+print(20*'-')
+x=(tekst.count("temp."))
+y=(tekst.count("temperatu"))
+z=(tekst.count("gorączka"))
+lGor=x+y+z
+print(" Zadanie 3.0\n Liczba osób, która w województwie pomorskim miała gorączkę: ",lGor)
+
 f = open("../odpowiedzi.txt",mode="w")
 f.write("Zadanie 2.1\nIle łącznie NOPów zostało wczytanych?:  1950\nZadanie 2.2\nIle z nich dotyczy kobiet?:  1675\nZadanie 2.3\n Ile z nich dotyczy mężczyzn?:  265\nZadanie 3.0\n Liczba osób, która w województwie pomorskim miała gorączkę?:  8")
 f.close()
+
+#zad 4
+print(20*"-")
+print(" Zadanie 4.0\nZestawienie województw: ")
+print(woj_list)
+pom=woj_list.count("pomorskie")
+kujpom=woj_list.count("kujawsko-pomorskie")
+lubel=woj_list.count("lubelskie")
+lubu=woj_list.count("lubuskie")
+maz=woj_list.count("mazowieckie")
+malop=woj_list.count("małopolskie")
+opo=woj_list.count("opolskie")
+podka=woj_list.count("podkarpackie")
+podla=woj_list.count("podlaskie")
+warma=woj_list.count("warmińsko-mazurskie")
+wlkp=woj_list.count("wielkopolskie")
+zachpom=woj_list.count("zachodniopomorskie")
+lodzkie=woj_list.count("łódzkie")
+slaskie=woj_list.count("śląskie")
+swieto=woj_list.count("świętokrzyskie")
+
+
+print("Kujawsko-Pomorskie: ", kujpom)
+print("Lubelskie", lubel)
+print("Lubuskie: ", lubu)
+print("Mazowieckie: ", maz)
+print("Małopolskie: ", malop)
+print("Opolskie: ", opo)
+print("Podkarpackie: ", podka)
+print("Podlaskie: ", podla)
+print("Warmińsko-Mazurskie: ", warma)
+print("Wielkopolskie: ", wlkp)
+print("Zachodniopomorskie: ", zachpom)
+print("Łódzkie: ", lodzkie)
+print("Śląskie: ", slaskie)
+print("Świętokrzyskie: ", swieto)
+
+print(20*"-")
+print("Zadanie 5:")
+ind=29
+mod=16
+print("Wyznaczenie swojego województwa, nr indeksu to: ",62929,"przez modulo: ",mod)
+woj_ind=ind.__mod__(mod)
+print("Numer województwa to:",woj_ind, "\nWytypowane wojewodztwo to: Zachodniopomorskie")
