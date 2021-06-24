@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 woj_list = []
 nop_list = []
+zach_list=[]
 with open('../160221.json', 'r', encoding="utf-8") as json_file:
     data = json.load(json_file)
 
@@ -25,8 +26,7 @@ class NOP(object):
     def getGender(self):
         self.plec
         return plec
-# test
-#nop11 = NOP('01-12-2005', "POMORSKIE", "SZTUMSKI", "KOBIETA", "KASZEL")
+
 i=1
 a=NOP()
 L=[]
@@ -47,24 +47,15 @@ for nop in data['NOP']:
     a=(id,date,wojewodztwo,powiat,plec,objawy)
     L.append(a)
     woj_list.append(nop["VOIVODESHIP"])
-    #i+1
+    if nop["VOIVODESHIP"]=="zachodniopomorskie":
+        zach_list.append(nop)
 
-
-#print("Wyświetlenie elementów listy NOP (nop_list): ",nop_list)
-
-
-
-#print("Ostatnia wartość bufora A to: ",a)
-#print("Zapisane wartości pod indeksem 1 : ",L[0])
-#print(L[0].count("K")) #ile K w 0
 lM=0
 #lista mezczyzn w NOP
 for a in L:
     if(a.__contains__('M')):
-        #print(a)
         lM+=1
-        #print(lM)
-#print(lM)
+
 
 #lista kobiet w NOP
 lK=0
@@ -161,3 +152,5 @@ mod=16
 print("Wyznaczenie swojego województwa, nr indeksu to: ",62929,"przez modulo: ",mod)
 woj_ind=ind.__mod__(mod)
 print("Numer województwa to:",woj_ind, "\nWytypowane wojewodztwo to: Zachodniopomorskie")
+print("Dane dotyczące województwa zachodniopomorskiego: \n",zach_list)
+
